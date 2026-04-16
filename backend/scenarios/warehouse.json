@@ -1,0 +1,70 @@
+{
+  "name": "Warehouse Alpha",
+  "width": 14,
+  "height": 10,
+  "nodes": [
+    {"id": "A1", "x": 1,  "y": 1},
+    {"id": "A2", "x": 5,  "y": 1},
+    {"id": "A3", "x": 9,  "y": 1},
+    {"id": "A4", "x": 13, "y": 1},
+
+    {"id": "B1", "x": 1,  "y": 4},
+    {"id": "B2", "x": 5,  "y": 4},
+    {"id": "B3", "x": 9,  "y": 4},
+    {"id": "B4", "x": 13, "y": 4},
+
+    {"id": "C1", "x": 1,  "y": 7},
+    {"id": "C2", "x": 5,  "y": 7},
+    {"id": "C3", "x": 9,  "y": 7},
+    {"id": "C4", "x": 13, "y": 7},
+
+    {"id": "D1", "x": 1,  "y": 9},
+    {"id": "D2", "x": 5,  "y": 9},
+    {"id": "D3", "x": 9,  "y": 9},
+    {"id": "D4", "x": 13, "y": 9}
+  ],
+  "lanes": [
+    {"u": "A1", "v": "A2", "max_speed": 2.5, "lane_type": "normal", "safety_level": "low", "directed": true},
+    {"u": "A2", "v": "A3", "max_speed": 2.5, "lane_type": "normal", "safety_level": "low", "directed": true},
+    {"u": "A3", "v": "A4", "max_speed": 2.5, "lane_type": "normal", "safety_level": "low", "directed": true},
+
+    {"u": "B4", "v": "B3", "max_speed": 2.0, "lane_type": "normal", "safety_level": "low", "directed": true},
+    {"u": "B3", "v": "B2", "max_speed": 2.0, "lane_type": "normal", "safety_level": "low", "directed": true},
+    {"u": "B2", "v": "B1", "max_speed": 2.0, "lane_type": "normal", "safety_level": "low", "directed": true},
+
+    {"u": "C1", "v": "C2", "max_speed": 2.0, "lane_type": "normal", "safety_level": "medium"},
+    {"u": "C2", "v": "C3", "max_speed": 1.2, "lane_type": "narrow", "safety_level": "high"},
+    {"u": "C3", "v": "C4", "max_speed": 2.0, "lane_type": "normal", "safety_level": "medium"},
+
+    {"u": "D1", "v": "D2", "max_speed": 1.0, "lane_type": "human_zone", "safety_level": "critical"},
+    {"u": "D2", "v": "D3", "max_speed": 1.0, "lane_type": "human_zone", "safety_level": "critical"},
+    {"u": "D3", "v": "D4", "max_speed": 1.0, "lane_type": "human_zone", "safety_level": "critical"},
+
+    {"u": "A1", "v": "B1", "max_speed": 1.8, "lane_type": "normal", "safety_level": "medium"},
+    {"u": "A2", "v": "B2", "max_speed": 1.5, "lane_type": "intersection", "safety_level": "high"},
+    {"u": "A3", "v": "B3", "max_speed": 1.5, "lane_type": "intersection", "safety_level": "high", "critical": true},
+    {"u": "A4", "v": "B4", "max_speed": 1.8, "lane_type": "normal", "safety_level": "medium"},
+
+    {"u": "B1", "v": "C1", "max_speed": 1.8, "lane_type": "normal", "safety_level": "medium"},
+    {"u": "B2", "v": "C2", "max_speed": 1.5, "lane_type": "intersection", "safety_level": "high"},
+    {"u": "B3", "v": "C3", "max_speed": 1.5, "lane_type": "intersection", "safety_level": "high", "critical": true},
+    {"u": "B4", "v": "C4", "max_speed": 1.8, "lane_type": "normal", "safety_level": "medium"},
+
+    {"u": "C1", "v": "D1", "max_speed": 1.2, "lane_type": "normal", "safety_level": "medium"},
+    {"u": "C2", "v": "D2", "max_speed": 1.0, "lane_type": "narrow", "safety_level": "high"},
+    {"u": "C3", "v": "D3", "max_speed": 1.0, "lane_type": "narrow", "safety_level": "high"},
+    {"u": "C4", "v": "D4", "max_speed": 1.2, "lane_type": "normal", "safety_level": "medium"}
+  ],
+  "robots": [
+    {"id": "R01", "start": "A1", "goal": "D4"},
+    {"id": "R02", "start": "D1", "goal": "A4"},
+    {"id": "R03", "start": "A4", "goal": "D1"},
+    {"id": "R04", "start": "D4", "goal": "A1"},
+    {"id": "R05", "start": "B1", "goal": "B4"},
+    {"id": "R06", "start": "B4", "goal": "B1"},
+    {"id": "R07", "start": "C1", "goal": "C4"},
+    {"id": "R08", "start": "C4", "goal": "C1"},
+    {"id": "R09", "start": "A2", "goal": "D2"},
+    {"id": "R10", "start": "A3", "goal": "D3"}
+  ]
+}
