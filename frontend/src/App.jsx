@@ -6,11 +6,8 @@ import FleetPanel from './components/FleetPanel';
 import EventLog from './components/EventLog';
 
 export default function App() {
-  // Build WS URL from current host (works with Vite proxy or standalone)
-  const wsUrl =
-    (window.location.protocol === 'https:' ? 'wss://' : 'ws://') +
-    window.location.host +
-    '/ws/sim';
+  const BACKEND = 'https://laneaware.onrender.com';
+  const wsUrl = BACKEND.replace(/^http/, 'ws') + '/ws/sim';
 
   const { snapshot, status, send } = useSimSocket(wsUrl);
   const [speed, setSpeed] = useState(1.0);
