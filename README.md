@@ -1,12 +1,18 @@
 # Lane-Aware Multi-Robot Traffic Control
 
-A fullstack simulation & control console for coordinating multiple robots in
-a structured environment (warehouse / factory) under lane-based traffic rules,
-congestion awareness, reservations, and deadlock handling.
+A fullstack real-time simulation console for coordinating multiple robots in a structured warehouse environment under lane-based traffic rules, congestion awareness, reservations, and deadlock handling.
 
-- **Backend:** Python · FastAPI · async WebSocket
-- **Frontend:** React 18 · Vite · Canvas · (no component library — custom industrial UI)
-- **Transport:** `WebSocket /ws/sim` streams simulation snapshots in real time
+🔴 **Live Demo:** [lane-aware.vercel.app](https://lane-aware.vercel.app)
+
+> First load may take ~30 seconds — the backend spins up from sleep on Render's free tier.
+
+---
+
+## Stack
+
+- **Backend:** Python · FastAPI · async WebSocket — deployed on [Render](https://render.com)
+- **Frontend:** React 18 · Vite · Canvas — deployed on [Vercel](https://vercel.com)
+- **Transport:** WebSocket `/ws/sim` streams live simulation snapshots at ~8 ticks/sec
 
 ---
 
@@ -14,27 +20,40 @@ congestion awareness, reservations, and deadlock handling.
 
 Two scripts, two terminals, two minutes.
 
+### Backend (Linux / macOS)
 ```bash
-# 1. backend
 cd backend
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 bash run.sh            # http://localhost:8000
 ```
 
+### Backend (Windows / PowerShell)
+```powershell
+cd backend
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+python -m uvicorn app:app --host 0.0.0.0 --port 8000
+```
+Or just double-click `run.bat` — it sets up the venv on first run.
+
+### Frontend (dev mode with hot reload)
 ```bash
-# 2. frontend — dev mode (hot reload, vite proxy -> backend)
 cd frontend
 npm install
-npm run dev            # http://localhost:5173
+npm run dev            # http://localhost:5173 — Vite proxies /api and /ws to :8000
 ```
 
-Or, for a **single-port deploy**, build the frontend and let FastAPI serve it:
-
+### Single-port deploy
+Build the frontend and let FastAPI serve it:
 ```bash
 cd frontend && npm install && npm run build
-cd ../backend && bash run.sh
+cd ../backend && bash run.sh     # or run.bat on Windows
 # open http://localhost:8000 — UI + API + WS all on one port
 ```
+
+> **Note:** `requirements.txt` uses plain `uvicorn` (not `uvicorn[standard]`). The `[standard]` extra pulls in `watchfiles`, which needs a Rust toolchain to build from source on some Windows / MSYS2 setups. Plain uvicorn is pure Python and enough for this project — auto-reload on code changes isn't needed at runtime.
 
 ---
 
